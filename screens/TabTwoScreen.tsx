@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+
+import FIXTURES from '../data/fixtures';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,8 +10,12 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fixtures</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <FlatList data={FIXTURES[0]} keyExtractor={item => item.home} renderItem={({item}) => (
+                <View>
+                    <Text>{item.home}</Text>
+                    <Text>{item.away}</Text>
+                </View>
+            )} />
     </View>
   );
 }
